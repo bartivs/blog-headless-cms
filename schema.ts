@@ -70,6 +70,7 @@ export const lists: Lists = {
     // this is the fields for our Post list
     fields: {
       title: text({ validation: { isRequired: true } }),
+      description: text({ validation: { isRequired: false }, defaultValue: "-" }),
 
       // the document field can be used for making rich editable content
       //   you can find out more at https://keystonejs.com/docs/guides/document-fields
