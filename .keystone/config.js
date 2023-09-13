@@ -67,6 +67,7 @@ var lists = {
     // this is the fields for our Post list
     fields: {
       title: (0, import_fields.text)({ validation: { isRequired: true } }),
+      published: (0, import_fields.checkbox)({ defaultValue: false }),
       description: (0, import_fields.text)({ validation: { isRequired: false }, defaultValue: "-" }),
       // the document field can be used for making rich editable content
       //   you can find out more at https://keystonejs.com/docs/guides/document-fields
@@ -182,13 +183,13 @@ var keystone_default = withAuth(
       // we're using sqlite for the fastest startup experience
       //   for more information on what database might be appropriate for you
       //   see https://keystonejs.com/docs/guides/choosing-a-database#title
-      provider: "sqlite",
-      url: "file:./keystone.db"
+      provider: "postgresql",
+      url: `postgres://postgres:${process.env.DB_PASS}@db:5432/keystone`
     },
     lists,
     session,
     server: {
-      port: 3001,
+      port: 3e3,
       cors: { origin: ["http://localhost:3000"], credentials: false }
     }
   })

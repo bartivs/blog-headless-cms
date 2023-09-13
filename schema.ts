@@ -16,6 +16,7 @@ import {
   password,
   timestamp,
   select,
+  checkbox,
 } from '@keystone-6/core/fields';
 
 // the document field is a more complicated field, so it has it's own package
@@ -70,6 +71,7 @@ export const lists: Lists = {
     // this is the fields for our Post list
     fields: {
       title: text({ validation: { isRequired: true } }),
+      published: checkbox({ defaultValue: false }),
       description: text({ validation: { isRequired: false }, defaultValue: "-" }),
 
       // the document field can be used for making rich editable content

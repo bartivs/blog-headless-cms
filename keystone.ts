@@ -20,13 +20,13 @@ export default withAuth(
       // we're using sqlite for the fastest startup experience
       //   for more information on what database might be appropriate for you
       //   see https://keystonejs.com/docs/guides/choosing-a-database#title
-      provider: 'sqlite',
-      url: 'file:./keystone.db',
+      provider: 'postgresql',
+      url: `postgres://postgres:${process.env.DB_PASS}@db:5432/keystone`,
     },
     lists,
     session,
     server: {
-      port: 3001,
+      port: 3000,
       cors: { origin: ['http://localhost:3000'], credentials: false },
     }
   })

@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  keystone:
+    build:
+      context: .      
+      dockerfile: Dockerfile.keystone
+    env_file: .env
+    # command: yarn keystone prisma migrate deploy  && yarn start 
+    command: tail -f /dev/null
+    ports:
+      - 3001:3000
+    depends_on:
+      - db 
+    restart: always
+  
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS} 
+      POSTGRES_DB: keystone 
+    volumes:
+      - db_data:/var/lib/postgresql 
+  
+  
+volumes:
+  db_data: 
+  keystone_data:

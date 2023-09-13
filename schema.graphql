@@ -55,7 +55,13 @@ input StringFilter {
   contains: String
   startsWith: String
   endsWith: String
+  mode: QueryMode
   not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
 }
 
 input NestedStringFilter {
@@ -137,6 +143,7 @@ input PostRelateToManyForCreateInput {
 type Post {
   id: ID!
   title: String
+  published: Boolean
   description: String
   content: Post_content_Document
   author: User
@@ -159,10 +166,16 @@ input PostWhereInput {
   NOT: [PostWhereInput!]
   id: IDFilter
   title: StringFilter
+  published: BooleanFilter
   description: StringFilter
   author: UserWhereInput
   tags: TagManyRelationFilter
   pubDate: DateTimeFilter
+}
+
+input BooleanFilter {
+  equals: Boolean
+  not: BooleanFilter
 }
 
 input TagManyRelationFilter {
@@ -185,12 +198,14 @@ input DateTimeFilter {
 input PostOrderByInput {
   id: OrderDirection
   title: OrderDirection
+  published: OrderDirection
   description: OrderDirection
   pubDate: OrderDirection
 }
 
 input PostUpdateInput {
   title: String
+  published: Boolean
   description: String
   content: JSON
   author: UserRelateToOneForUpdateInput
@@ -218,6 +233,7 @@ input PostUpdateArgs {
 
 input PostCreateInput {
   title: String
+  published: Boolean
   description: String
   content: JSON
   author: UserRelateToOneForCreateInput
@@ -421,11 +437,6 @@ enum KeystoneAdminUIFieldMetaItemViewFieldMode {
 enum KeystoneAdminUIFieldMetaItemViewFieldPosition {
   form
   sidebar
-}
-
-enum QueryMode {
-  default
-  insensitive
 }
 
 type KeystoneAdminUIFieldGroupMeta {
