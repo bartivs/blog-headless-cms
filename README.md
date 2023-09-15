@@ -1,4 +1,8 @@
-# Keystone Project Starter
+A headless CMS using KeystoneJS for a personal site
+
+
+
+# Keystone Project Starter 
 
 Welcome to Keystone!
 
