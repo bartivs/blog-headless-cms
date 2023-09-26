@@ -5,27 +5,20 @@ services:
       context: .      
       dockerfile: Dockerfile.keystone
     env_file: .env
-    command: yarn start 
+    command: yarn start  --with-migrations
     # command: tail -f /dev/null
     ports:
       - 3001:3000
     depends_on:
       - db 
     restart: always
-
-  migrate:
-    build: 
-      context: .      
-      dockerfile: Dockerfile.keystone
-    command:  yarn keystone prisma migrate deploy  
-    depends_on:
-      - db 
-    restart: "no" 
   db:
     image: postgres:15-alpine
+    env_file: .env
     environment:
-      POSTGRES_PASSWORD: ${DB_PASS} 
+      POSTGRES_PASSWORD: $DB_PASS 
       POSTGRES_DB: keystone 
+      POSTGRES_USER: keystone 
     volumes:
       - db_data:/var/lib/postgresql 
   
