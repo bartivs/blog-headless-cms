@@ -5,6 +5,7 @@ RUN yarn install --ignore-scripts
 
 FROM node:lts-buster as runner 
 WORKDIR /home/node/code
+RUN chown  -R node:node /home/node 
 USER node
 COPY --from=deps --chown=node:node /deps/node_modules ./node_modules
 COPY --chown=node:node . .
